@@ -6,7 +6,8 @@ const fieldCharacter = '░';
 const pathCharacter = '*';
 
 // Helper Functions
-const updatePosition = require('./helpers.js');
+// const updatePosition = require('./helpers.js');
+// const evalPosition = require('./helpers.js');
 
 class Field {
     constructor(twoDArray) {
@@ -26,7 +27,7 @@ const testField = new Field([
     ['░', '^', '░'],
 ]);
 
-// testField.print();
+testField.print();
 
 let i = 0;
 let j = 0;
@@ -34,8 +35,35 @@ let playerPosition = testField.field[i][j];
 
 let direction = prompt('Which way? ');
 
+// Helper functions
+const updatePosition = direction => {
+    if (direction === 'l') {
+        j--;
+    } else if (direction === 'r') {
+        j++;
+    } else if (direction === 'u') {
+        i--;
+    } else if (direction === 'd') {
+        i++;
+    } else {
+        console.log('Invalid Entry');
+    }
+
+    playerPosition = testField.field[i][j];
+}
+const evalPosition = () => {
+    if (!playerPosition) {
+        console.log('You move out of bounds.');
+    } else if (playerPosition === hole) {
+        console.log('You fell into a hole.');
+    } else if (playerPosition === fieldCharacter) {
+        playerPosition = pathCharacter;
+        testField.print();
+        let direction = prompt('Which way? ');
+    } else if (playerPosition === hat) {
+        console.log('Congrats, you found your hat!');
+    }
+}
+
 updatePosition(direction);
-// console.log(`You are now at the coordinates: [${i}][${j}]`);
-if (!playerPosition) {
-    console.log('test successful');
-} 
+evalPosition();
