@@ -1,4 +1,5 @@
 const prompt = require('prompt-sync')({sigint: true});
+const Field = require('./class');
 
 const hat = '^';
 const hole = 'O';
@@ -9,17 +10,6 @@ const pathCharacter = '*';
 // const updatePosition = require('./helpers.js');
 // const evalPosition = require('./helpers.js');
 
-class Field {
-    constructor(twoDArray) {
-        this.field = twoDArray;
-    }
-    // Print Method
-    print() {
-        for (let i=0; i<this.field.length; i++) {
-            console.log(this.field[i].join(''));
-        }
-    }
-}
 // Instance of class Field
 const testField = new Field([
     ['*', '░', 'O'],
