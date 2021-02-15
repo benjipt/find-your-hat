@@ -18,13 +18,14 @@ const updatePosition = direction => {
 // Evalutes player position
 const evalPosition = () => {
     if (!playerPosition) {
-        console.log('You move out of bounds.');
+        console.log('You moved out of bounds.');
     } else if (playerPosition === hole) {
         console.log('You fell into a hole.');
     } else if (playerPosition === fieldCharacter) {
-        playerPosition = pathCharacter;
+        testField.field[i].splice(j, 1, pathCharacter);
         testField.print();
-        let direction = prompt('Which way? ');
+        direction = prompt('Which way? ');
+        updatePosition(direction);
     } else if (playerPosition === hat) {
         console.log('Congrats, you found your hat!');
     }
