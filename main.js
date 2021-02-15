@@ -17,14 +17,16 @@ class Field {
     }
 }
 
-
-// Testing...
 const testField = new Field([
     ['*', '░', 'O'],
     ['░', 'O', '░'],
     ['░', '^', '░'],
-  ]);
+]);
+
+testField.print();
+
+
+// Testing...
 
 // For testing the print method
-//   testField.print();
 // PASSED
