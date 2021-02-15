@@ -4,3 +4,9 @@ const hat = '^';
 const hole = 'O';
 const fieldCharacter = '░';
 const pathCharacter = '*';
+
+class Field {
+    constructor(twoDArray) {
+        this.field = twoDArray;
+    }
+}
