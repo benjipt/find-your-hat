@@ -5,6 +5,9 @@ const hole = 'O';
 const fieldCharacter = '░';
 const pathCharacter = '*';
 
+// Helper Functions
+const updatePosition = require('./helpers.js');
+
 class Field {
     constructor(twoDArray) {
         this.field = twoDArray;
@@ -23,10 +26,16 @@ const testField = new Field([
     ['░', '^', '░'],
 ]);
 
-testField.print();
+// testField.print();
 
+let i = 0;
+let j = 0;
+let playerPosition = testField.field[i][j];
 
-// Testing...
+let direction = prompt('Which way? ');
 
-// For testing the print method
-// PASSED
+updatePosition(direction);
+// console.log(`You are now at the coordinates: [${i}][${j}]`);
+if (!playerPosition) {
+    console.log('test successful');
+} 
