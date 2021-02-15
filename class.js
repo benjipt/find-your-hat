@@ -13,3 +13,10 @@ class Field {
         
     }
 }
+
+
+// FOR REFERENCE:
+// const hat = '^';
+// const hole = 'O';
+// const fieldCharacter = '░';
+// const pathCharacter = '*';
