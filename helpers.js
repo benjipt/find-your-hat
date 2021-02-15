@@ -26,6 +26,7 @@ const evalPosition = () => {
         testField.print();
         direction = prompt('Which way? ');
         updatePosition(direction);
+        evalPosition();
     } else if (playerPosition === hat) {
         console.log('Congrats, you found your hat!');
     }
