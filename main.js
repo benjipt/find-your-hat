@@ -1,5 +1,5 @@
 const prompt = require('prompt-sync')({sigint: true});
-const Field = require('./class');
+// const Field = require('./class');
 
 const hat = '^';
 const hole = 'O';
@@ -10,18 +10,48 @@ const pathCharacter = '*';
 // const updatePosition = require('./helpers.js');
 // const evalPosition = require('./helpers.js');
 
-// Instance of class Field
-const testField = new Field([
-    ['*', '░', 'O'],
-    ['░', 'O', '░'],
-    ['░', '^', '░'],
-]);
+class Field {
+    constructor(twoDArray) {
+        this.field = twoDArray;
+        this.locationi = 0;
+        this.locationj = 0;
+        this.field[0][0] = pathCharacter;
+    }
+    // Print Method
+    print() {
+        for (let i=0; i<this.field.length; i++) {
+            console.log(this.field[i].join(''));
+        }
+    }
+    // static method to generate field
+    static generateField(height, width, percentage) {
+        const field = new Array(height).fill(0).map(el => new Array(width));
+        for (let i=0; i<height; i++) {
+            for (let j=0; j<width; j++) {
+                const prob = Math.random();
+                field[i][j] = prob > percentage ? fieldCharacter : hole;
+            }
+        }
+    // set hat location
+    const hatLocation = {
+        i: Math.floor(Math.random() * height),
+        j: Math.floor(Math.random() * width)
+    };
+    while (hatLocation.i === 0 && hatLocation.j === 0) {
+        hatLocation.i = Math.floor(Math.random() * height);
+        hatLocation.j = Math.floor(Math.random() * width);
+    }
+    field[hatLocation.i][hatLocation.j] = hat;
+    return field;
+    }
+}
 
-testField.print();
+const myField = new Field(Field.generateField(10, 10, 0.2));
+myField.print();
 
 let i = 0;
 let j = 0;
-let playerPosition = testField.field[i][j];
+let playerPosition = myField.field[i][j];
 
 let direction = prompt('Which way? ');
 
@@ -39,7 +69,7 @@ const updatePosition = direction => {
         console.log('Invalid Entry');
     }
 
-    playerPosition = testField.field[i][j];
+    playerPosition = myField.field[i][j];
 }
 const evalPosition = () => {
     if (!playerPosition) {
@@ -47,8 +77,8 @@ const evalPosition = () => {
     } else if (playerPosition === hole) {
         console.log('You fell into a hole.');
     } else if (playerPosition === fieldCharacter) {
-        testField.field[i].splice(j, 1, pathCharacter);
-        testField.print();
+        myField.field[i].splice(j, 1, pathCharacter);
+        myField.print();
         direction = prompt('Which way? ');
         updatePosition(direction);
         evalPosition();
@@ -59,5 +89,3 @@ const evalPosition = () => {
 
 updatePosition(direction);
 evalPosition();
-
-// field updates path correctly, but game terminates after two cyles.
